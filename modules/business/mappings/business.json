@@ -1,0 +1,92 @@
+{
+  "mappings": {
+    "_doc": {
+      "properties": {
+        "suggest": {
+          "type": "completion"
+        },
+        "name": {
+          "type": "text"
+        },
+        "user_id": {
+          "type": "keyword"
+        },
+        "description": {
+          "type": "text"
+        },
+        "website": {
+          "type": "keyword"
+        },
+        "category": {
+          "properties": {
+            "id": {
+              "type": "keyword"
+            },
+            "text": {
+              "type": "text",
+              "fields": {
+                "raw": {
+                  "type": "keyword"
+                }
+              }
+            }
+          }
+        },
+        "address1": {
+          "type": "text"
+        },
+        "po_box": {
+          "type": "keyword"
+        },
+        "city": {
+          "type": "keyword"
+        },
+        "region_state": {
+          "type": "keyword"
+        },
+        "country": {
+          "type": "keyword"
+        },
+        "location": {
+          "type": "geo_point"
+        },
+        "location_description": {
+          "type": "text"
+        },
+        "phonenumber": {
+          "type": "keyword"
+        },
+        "cover": {
+          "type": "text"
+        },
+        "views": {
+          "type": "long"
+        },
+        "reports": {
+          "type": "long"
+        },
+        "likes": {
+          "type": "long"
+        },
+        "opening_time": {
+          "type": "keyword"
+        },
+        "mobility": {
+          "type": "keyword"
+        },
+        "date_created": {
+          "type": "date"
+        },
+        "activated": {
+          "type": "boolean"
+        },
+        "deleted": {
+          "type": "boolean"
+        },
+        "suspended": {
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}

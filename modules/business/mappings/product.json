@@ -1,0 +1,100 @@
+{
+	"mappings":{
+    	"_doc": {
+	      "properties": {
+					"suggest": {
+						"type": "completion"
+					},
+	        "name": {
+	          "type": "text",
+	          "fields":{
+	            "raw": {
+	              "type": "keyword"
+	            },
+	            "english": {
+	              "type": "text",
+	              "analyzer": "english"
+	            },
+	            "french": {
+	              "type": "text",
+	              "analyzer": "french"
+	            }
+	          }
+	        },
+	        "business_id": {
+	          "type": "keyword"
+					},
+					"user_id": {
+							"type": "keyword"
+					},
+	        "description": {
+	          "type": "text",
+	          "fields": {
+	            "english": {
+	              "type": "text",
+	              "analyzer": "english"
+	            },
+	            "french": {
+	              "type": "text",
+	              "analyzer": "french"
+	            }
+	          }
+	        },
+	        "date_created": {
+	          "type": "date"
+	        },
+	        "last_update": {
+	          "type": "date"
+	        },
+	        "price": {
+	          "type": "float"
+					},
+					"favorite": {
+	          "type": "boolean"
+					},
+					"likes": {
+	          "type": "integer"
+					},
+					"reports": {
+	          "type": "integer"
+	        },
+	        "color": {
+	          "type": "keyword"
+	        },
+	        "brand": {
+	          "type": "keyword"
+	        },
+					"category": {
+						"properties": {
+							"id": {
+								"type": "keyword"
+							},
+							"text": {
+								 "type": "text",
+								 "fields": {
+									 "raw": {
+										 "type": "keyword"
+									 }
+								 }
+							}
+						}
+					},
+	        "promoted": {
+	          "type": "boolean"
+	        },
+	        "available": {
+	          "type": "boolean"
+	        },
+	        "images": {
+	        	"type": "text"
+					},
+					"online_store": {
+						"type": "text"
+					},
+	        "location": {
+	          "type": "geo_point"
+	        }
+	      }
+	    }
+	}
+}
