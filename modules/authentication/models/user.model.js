@@ -4,14 +4,13 @@
  * Module dependencies.
  */
 const mongoose = require('mongoose'),
-   bcrypt  = require('bcryptjs'),
+   bcrypt  = require('bcrypt'),
    Schema = mongoose.Schema;
 
 /**
- * Account Schema
+ * User Schema
  */
-//TODO: use a single pattern for property naming eg first_name, client_token
-let UserSchema = new Schema({
+let User = new Schema({
   username: {
     type: String,
     default: '',
@@ -42,18 +41,6 @@ let UserSchema = new Schema({
     type: String,
     default: ''
   },
-  phonenumber: {
-    type: String,
-    default: ''
-  },
-  activated: { // client business has been validated
-    type: Boolean,
-    default: false
-  },
-  business_active: { // client has created a business [ activated | not_activated ]
-    type: Boolean,
-    default: false
-  },
   banned:{
     type: Boolean,
     default: false
@@ -70,10 +57,6 @@ let UserSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "MediaSchema"
   },
-  clientToken: {
-    type: String,
-    default: ''
-  },
   signed_in: {
     type: Date,
     default: Date.now
@@ -83,7 +66,7 @@ let UserSchema = new Schema({
     default: Date.now()
   }
 });
-UserSchema.pre('save', function (next) {
+User.pre('save', function (next) {
     var user = this;
     if (!user.isModified('password')) return next();
     //$Vers$log2(NumRounds)$saltvalue
@@ -95,15 +78,8 @@ UserSchema.pre('save', function (next) {
       user.password = hash;
       next();
     })
- /*    console.log("++++++++++++++++++++++++++++++++++++++++++++ password needs to be modified.", )
-    argon2.hash(user.password, { type: argon2.argon2id}).then(hash => {
-         user.password = hash;
-         next();
-    }, err => next(err) ); */
-    
 });
-UserSchema.statics.authenticate = function (username, password, callback) {
-    console.log('<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<',{username: username, password: password});
+User.statics.authenticate = function (username, password, callback) {
     var user = this;
       user.findOne({ $or:[
                         {username: username},
@@ -125,24 +101,12 @@ UserSchema.statics.authenticate = function (username, password, callback) {
             return callback(err);
           }
         }) 
-    /*     argon2.verify(user.password.trim(), password.trim()).then(match => {
-          if (match) {
-            // password match
-            return callback(null, user);
-          } else {
-            // password did not match
-            return callback(err);
-          }
-        }).catch(err => {
-            // internal failure
-            return callback(err);
-        }); */
       });
   }
-  UserSchema.methods.verifyPassword = async function(password){
+  User.methods.verifyPassword = async function(password){
       let user = this;
       let results = await bcrypt.compare(password.trim(), user.password.trim());
       return results;
   };
 
-module.exports = mongoose.model('UserSchema', UserSchema);
+module.exports = mongoose.model('User', User);
