@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "NODE_ENV=development node server.js"
+    "start": "NODE_ENV=./core/env/development.js node ./server.js"
   },
   "dependencies": {
     "bcrypt": "^3.0.3",
