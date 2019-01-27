@@ -10,9 +10,7 @@ module.exports = {
     uri: process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://' + (process.env.DB_1_PORT_27017_TCP_ADDR || 'localhost') + '/dt-collection',
     options: {
       user: '',
-      pass: '',
-      useNewUrlParser: true, //fix source: https://github.com/typeorm/mongo-typescript-example/issues/1#issuecomment-403373198
-      useCreateIndex: true, //https://github.com/Automattic/mongoose/issues/6922#issue-354147871
+      pass: ''
     },
     // Enable mongoose debug mode
     debug: process.env.MONGODB_DEBUG || false
