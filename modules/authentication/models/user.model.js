@@ -79,14 +79,9 @@ User.pre('save', function (next) {
       next();
     })
 });
-User.statics.authenticate = function (username, password, callback) {
+User.statics.authenticate = function (email, password, callback) {
     var user = this;
-      user.findOne({ $or:[
-                        {username: username},
-                        {email: username}
-                    ]
-                })
-      .exec(function (err, user) {
+      user.findOne({email}, function (err, user) {
         if (err) {
           return callback(err)
         } else if (!user) {

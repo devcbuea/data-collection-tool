@@ -26,6 +26,11 @@ module.exports = {
       //stream: 'access.log'
     }
   },
+  jwt: {
+    issuer: "DeveloperCirclesBuea",
+    expiresIn: "14d",
+    secret: process.env.JWT_SECRET || '_NEW_LEVEL_'
+  },
   port: process.env.PORT || 3000,
   sessionSecret: 'DevCBuea',
   sessionCollection: 'sessions',
