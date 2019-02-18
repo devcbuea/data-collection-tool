@@ -3,6 +3,7 @@
  */
 let User = require('../models/user.class')
 const jwt = require('jsonwebtoken')
+const config = require('../../../core/env/default')
 module.exports = {
     /**
      * Signup user 
@@ -20,7 +21,7 @@ module.exports = {
             delete user.errorMessage
             delete user.permission
             return res.json(user)
-        }else return res.status(500).json({message: errorMessage})
+        }else return res.status(500).json(user.errorMessage)
     },
     /**
      * Signup user 
@@ -31,14 +32,25 @@ module.exports = {
      * @returns {object} json object 
      */
     async login(req, res){
-        let {email, password} = req.body
+        var {email, password} = req.body
         try{
             let user = await User.authenticate(email, password)
-            // create jwt object
-            return res.json(user)
+            if(user){
+                let {id, email, permission, first_name, last_name, photo} = user;
+                // create jwt object
+                let token = jwt.sign(
+                                {id, email, permission, first_name, last_name, photo}
+                                ,config.jwt.secret,
+                                {
+                                    issuer: config.jwt.issuer,
+                                    expiresIn: config.jwt.expiresIn
+                                }
+                            )
+                return res.json({id, email, permission, first_name, last_name, photo, token})
+            }else return res.status(401).send('Email or password is not correct.')
+            
         }catch(e){
-            console.log(e)
-            return res.status(401).send('Password or email not correct.')
+            return res.status(500).send(e)
         }
     }
 }

@@ -28,6 +28,11 @@ class User {
             this.photo = user_props['photo'] ||  null
             this.created = user_props['create'] || new Date()
             this.errorMessage = null
+        }else{
+            /**
+             * implement a function that calls an asyc function
+             *  to populate user from constructor
+             * */ 
         }
     }
     /**
@@ -51,11 +56,11 @@ class User {
      * @param {string} password 
      */
     static authenticate(email, password){
-        console.log("We are in authentication")
         return new Promise( (resolve) => {
             UserModel.authenticate(email, password, (err, user) => {
                 if(err){
-                    resolve("Wrong password or email")
+                    console.log(err)
+                    resolve(false)
                 }else{
                     resolve(user)
                 }
@@ -92,10 +97,10 @@ class User {
             user.save((err, user_) => {
                 if(err){
                     that.errorMessage = err.message
-                    resolve(false)
+                    return resolve(false)
                 }
                 that = Object.assign(that, user_["_doc"])
-                resolve(true)
+                return resolve(true)
             })
         })
     }
