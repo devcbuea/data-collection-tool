@@ -90,7 +90,7 @@ class User {
      * @param {void}
      * @returns {Promise}
      */
-     save(){
+    save(){
         let that = this
         let user = new UserModel(that)
         return new Promise((resolve) => {
@@ -104,5 +104,19 @@ class User {
             })
         })
     }
+
+    static exist(query){
+        return new Promise((resolve)=>{
+            UserModel.findOne(query,function(err, user){
+                if (err) {
+                    console.log(err)
+                    return resolve(false);
+                }
+               if(user){
+                    return resolve(user)
+               } else return resolve(false)                      
+            });
+        });
+    }
 }
-module.exports = User
+module.exports = User;
