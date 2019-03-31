@@ -3,6 +3,7 @@
  */
 let User = require('../models/user.class')
 let Token = require('../models/token.class')
+let TokenModel = require('../models/token.model')
 const jwt = require('jsonwebtoken')
 const config = require('../../../core/env/default')
 const validator = require('validator')
@@ -93,31 +94,53 @@ module.exports = {
         }
     },
 
-    async resetPassword(req, res){
-        let token = req.body.token
-        let password = req.body.password
-        let confirm_password = req.body.confirm_password
+    // async resetPassword(req, res){
+    //     let token = req.body.token
+    //     let password = req.body.password
+    //     let confirm_password = req.body.confirm_password
 
-        if(token.length != 64){
-            res.status(400)
-            return res.send("Reset token is not valid.")
-        }
-        if(password.length < 10 || (password != confirm_password)){
-            res.status(400)
-            return res.send("An error occured")
-        }
-
-        //get the token
-        try{
-            let result = await User.resetPassword(token, password)
-            if(result == 'success')
-                return res.end('success')
-            res.status(500)
-            return res.end(result)
-        }catch(e){
-            console.log(e)
-            res.status(500)
-            return res.end("An error occured.")
-        }
-    }
+    //     TokenModel.findOne({
+    //         user: req.body.user,
+    //         token: req.body.token
+    //     }).populate('user')
+    //     .exec(function(err, user){
+    //         if(!err && user){
+    //             if(password === confirm_password){
+    //                 user.password = password
+    //                 user.token = token
+    //                 user.save(function(err){
+    //                     if(err){
+    //                         return res.status(422).send({
+    //                             message: err
+    //                         });
+    //                     }else {
+    //                         var data = {
+    //                           to: user.email,
+    //                           from: email,
+    //                           subject: 'Password Reset Confirmation',
+    //                           context: {
+    //                             name: user.username
+    //                           }
+    //                         }
+    //                         smtpTransport.sendMail(data, function(err){
+    //                             if(!err){
+    //                                 return res.json({ message: 'Password reset' })
+    //                             }else{
+    //                                 return resolve(false)
+    //                             }
+    //                         })
+    //                     }         
+    //                 })
+    //             }else{
+    //                 return res.status(422).send({
+    //                     message: 'Passwords do not match'
+    //                   });
+    //             }
+    //         }else{
+    //             return res.status(400).send({
+    //                 message: 'Password reset token is invalid or has expired.'
+    //               });
+    //         }
+    //     })
+    // }
 }

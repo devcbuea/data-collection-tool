@@ -104,26 +104,5 @@ User.statics.authenticate = function (email, password, callback) {
       return results;
   };
 
-  // User.pre('save', function(next){
-  //   var user = this ;
-  //   User.find({ 'username': username,'email':email },
-  //     function(err, users){
-  //       if(err) {
-  //         return next(err);
-  //       } else if(users) {
-  //         if (_.find(users , {email: user.email})){
-  //           user.invalidate('email', 'email is already registered'); 
-  //           next( new Error("email is already registered"));
-  //         }
-  //         else if (_.find(users , {username: user.username})){
-  //           user.invalidate('username', 'username is already taken'); 
-  //           next( new Error("username is already taken"));
-  //         }
-  //       }
-  //       else{
-  //         next();
-  //       }   
-  //   });
-  // });
 
 module.exports = mongoose.model('User', User);

@@ -1,10 +1,10 @@
 const mongoose = require('mongoose'),
-    UserModel = mongoose.model('User')
+    UserModel = mongoose.model('User'),
+    TokenModel = mongoose.model('Token');
 /** 
  * @classdesc User model class, manage the the user module with db
  * 
 */
-
 class User {
     /**
      * @constructor Initiliases user model class
@@ -115,6 +115,21 @@ class User {
                if(user){
                     return resolve(user)
                } else return resolve(false)                      
+            });
+        });
+    }
+
+    static resetPassword(token, password){
+        return new Promise((resolve)=>{
+            TokenModel.findOne({token:token, purpose:'reset'}, function(err, _token){
+                let diff = Date.now()- (new Date(_token.created)).getTime();
+                if(diff > 300){
+                    console.log(err);
+                    return resolve(false);
+                }else{
+
+                    return resolve(true);
+                }
             });
         });
     }
