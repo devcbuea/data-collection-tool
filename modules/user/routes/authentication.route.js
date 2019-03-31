@@ -17,5 +17,5 @@ module.exports = function (app) {
   //route for forgot password
   app.route('/forgot-password').post(Authentication.forgotPassword);
   app.route('/reset-password').post(Authentication.resetPassword);
-  
+    
 }

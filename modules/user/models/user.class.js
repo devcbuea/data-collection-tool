@@ -1,6 +1,7 @@
-const mongoose = require('mongoose'),
-    UserModel = mongoose.model('User'),
-    TokenModel = mongoose.model('Token');
+const mongoose = require('mongoose')
+require('../models/user.model')
+const UserModel = mongoose.model('User')
+
 /** 
  * @classdesc User model class, manage the the user module with db
  * 
