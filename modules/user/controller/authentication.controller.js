@@ -94,53 +94,53 @@ module.exports = {
         }
     },
 
-    async resetPassword(req, res){
-        let token = req.body.token
-        let password = req.body.password
-        let confirm_password = req.body.confirm_password
+    // async resetPassword(req, res){
+    //     let token = req.body.token
+    //     let password = req.body.password
+    //     let confirm_password = req.body.confirm_password
 
-        TokenModel.findOne({
-            user: req.body.user,
-            token: req.body.token
-        }).populate('user')
-        .exec(function(err, user){
-            if(!err && user){
-                if(password === confirm_password){
-                    user.password = password
-                    user.token = token
-                    user.save(function(err){
-                        if(err){
-                            return res.status(422).send({
-                                message: err
-                            });
-                        }else {
-                            var data = {
-                              to: user.email,
-                              from: email,
-                              subject: 'Password Reset Confirmation',
-                              context: {
-                                name: user.username
-                              }
-                            }
-                            smtpTransport.sendMail(data, function(err){
-                                if(!err){
-                                    return res.json({ message: 'Password reset' })
-                                }else{
-                                    return resolve(false)
-                                }
-                            })
-                        }         
-                    })
-                }else{
-                    return res.status(422).send({
-                        message: 'Passwords do not match'
-                      });
-                }
-            }else{
-                return res.status(400).send({
-                    message: 'Password reset token is invalid or has expired.'
-                  });
-            }
-        })
-    }
+    //     TokenModel.findOne({
+    //         user: req.body.user,
+    //         token: req.body.token
+    //     }).populate('user')
+    //     .exec(function(err, user){
+    //         if(!err && user){
+    //             if(password === confirm_password){
+    //                 user.password = password
+    //                 user.token = token
+    //                 user.save(function(err){
+    //                     if(err){
+    //                         return res.status(422).send({
+    //                             message: err
+    //                         });
+    //                     }else {
+    //                         var data = {
+    //                           to: user.email,
+    //                           from: email,
+    //                           subject: 'Password Reset Confirmation',
+    //                           context: {
+    //                             name: user.username
+    //                           }
+    //                         }
+    //                         smtpTransport.sendMail(data, function(err){
+    //                             if(!err){
+    //                                 return res.json({ message: 'Password reset' })
+    //                             }else{
+    //                                 return resolve(false)
+    //                             }
+    //                         })
+    //                     }         
+    //                 })
+    //             }else{
+    //                 return res.status(422).send({
+    //                     message: 'Passwords do not match'
+    //                   });
+    //             }
+    //         }else{
+    //             return res.status(400).send({
+    //                 message: 'Password reset token is invalid or has expired.'
+    //               });
+    //         }
+    //     })
+    //}
 }
