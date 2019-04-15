@@ -36,5 +36,6 @@ module.exports = {
   sessionCollection: 'sessions',
   logo: 'modules/core/img/brand/logo.png',
   favicon: 'modules/core/img/brand/favicon.ico',
+  siteURL: process.env.SITE_URL || 'http://localhost:' + (process.env.PORT || 3000)
   
 }

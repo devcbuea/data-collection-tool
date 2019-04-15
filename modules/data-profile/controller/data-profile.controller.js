@@ -3,6 +3,7 @@
  */
 let DataProfile = require('../models/data-profile.class')
 const config = require('../../../core/env/default')
+let DataProfileModel = require('../models/data-profile.model');
 module.exports = {
     /**
      * @method get get information about a dataprofile to
@@ -23,8 +24,23 @@ module.exports = {
      * @returns {object} json object 
      */
     async create(req, res){
-        
-        return res.send('This controller handler is to be implemented')
+        if(req.body.name && req.body.description){
+            const dataprofile = new DataProfileModel({
+                name:req.body.name,
+                description: req.body.description,
+                category: req.body.category,
+                contributors: req.body.contributors,
+                fields: req.body.fields
+            });
+            dataprofile.save(function(err){
+                if(err){
+                    return res.status(500).json({error: err})
+                }return res.send("dataprofile successfully created")
+            })
+        }else{
+            return res.send("Failed !!! \n reason: name or description missing")
+        }
+        // return res.send('This controller handler is to be implemented')
     },
     /** 
      * @method getSummary get summary information about a data profile 
