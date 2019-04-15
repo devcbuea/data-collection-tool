@@ -6,7 +6,6 @@ const UserModel = mongoose.model('User')
  * @classdesc User model class, manage the the user module with db
  * 
 */
-
 class User {
     /**
      * @constructor Initiliases user model class
@@ -92,7 +91,7 @@ class User {
      * @param {void}
      * @returns {Promise}
      */
-     save(){
+    save(){
         let that = this
         let user = new UserModel(that)
         return new Promise((resolve) => {
@@ -106,5 +105,34 @@ class User {
             })
         })
     }
+
+    static exist(query){
+        return new Promise((resolve)=>{
+            UserModel.findOne(query,function(err, user){
+                if (err) {
+                    console.log(err)
+                    return resolve(false);
+                }
+               if(user){
+                    return resolve(user)
+               } else return resolve(false)                      
+            });
+        });
+    }
+
+    static resetPassword(token, password){
+        return new Promise((resolve)=>{
+            TokenModel.findOne({token:token, purpose:'reset'}, function(err, _token){
+                let diff = Date.now()- (new Date(_token.created)).getTime();
+                if(diff > 300){
+                    console.log(err);
+                    return resolve(false);
+                }else{
+
+                    return resolve(true);
+                }
+            });
+        });
+    }
 }
-module.exports = User
+module.exports = User;

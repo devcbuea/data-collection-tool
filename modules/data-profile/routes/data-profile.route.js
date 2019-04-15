@@ -1,5 +1,6 @@
 'use strict'
-let DataProfile = require('../controller/data-profile.controller')
+let DataProfile = require('../controller/data-profile.controller');
+
 module.exports = function (app) {
  
   app.route('/data-profile').get(function(req,res){

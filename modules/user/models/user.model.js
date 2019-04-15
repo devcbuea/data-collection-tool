@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 const mongoose = require('mongoose'),
-   bcrypt  = require('bcrypt'),
+   bcrypt  = require('bcryptjs'),
    Schema = mongoose.Schema;
 
 /**
@@ -63,7 +63,7 @@ let User = new Schema({
   },
   last_seen: {
     type: Date,
-    default: Date.now()
+    default: Date.now
   }
 });
 User.pre('save', function (next) {
@@ -85,8 +85,8 @@ User.statics.authenticate = function (email, password, callback) {
         if (err) {
           return callback(err)
         } else if (!user) {
-          var err = new Error('User not found.');
-          return callback(err);
+          var error = new Error('User not found.');
+          return callback(error);
         }
 
         bcrypt.compare(password.trim(), user.password.trim(), function (err, result) {
@@ -103,5 +103,6 @@ User.statics.authenticate = function (email, password, callback) {
       let results = await bcrypt.compare(password.trim(), user.password.trim());
       return results;
   };
+
 
 module.exports = mongoose.model('User', User);

@@ -1,4 +1,7 @@
 # Hello ,welcome to Developer Circle Buea Dataset collection platform server
+## About Project
+The project is a data collection tool, it will allow for users to create data profiles. A data profile is defined to be the type of data to be collected in some sense a data object , a description of this data and properties (fields) that will need to be collected. People contribute data to a data profile. Essentially in the community we will create different data profiles for the type of data we want to collect. The creator of a data profile can limit those who can contribute to a data profile, every data associated to a data profile is public and can be exported in the supported formats json, cvs, xls, xml ,sql and any format. The platform will has a [web](https://github.com/devcbuea/dt-collect-web-client) and [mobile client](https://github.com/devcbuea/dt-collect-mobile-client)  and a backend which is this repo. The server  an api service that will be consumed by the mobile and web clients. The mobile client will essentially support just the data collection component of the project. The web client shall support all the components of the project including an administration console.
+
 ## Application Structure
 
 ```bash
@@ -29,6 +32,8 @@
 │           └── authentication.route.js --- naming <route>.route.js 
 ├── package.json --- package file
 ├── README.md
+|__ init-tests.js ---- Initialise test objects eg database objects
+|__ data-collection-tool.postman_collection.json ----- Postman file for testing api endpoints
 ├── server.js --- entry point of server
 ```
 ## Installation
