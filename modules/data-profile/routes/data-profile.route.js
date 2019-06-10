@@ -3,9 +3,7 @@ let DataProfile = require('../controller/data-profile.controller');
 
 module.exports = function (app) {
  
-  app.route('/data-profile').get(function(req,res){
-  	  res.end('Hello there,data-profile successfully reached.')
-  });
+  app.route('/data-profile').get(DataProfile.list);
   // create a data profile
   app.route('/data-profile').post(DataProfile.create);
   // get all information about dataprofile with DataProfileID

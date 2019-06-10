@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-require('../models/user.model')
 const UserModel = mongoose.model('User')
 
 /** 
@@ -9,7 +8,6 @@ const UserModel = mongoose.model('User')
 class User {
     /**
      * @constructor Initiliases user model class
-     * @async
      * @param {object} user_props user object that initialises user
      * @returns {void}
      */

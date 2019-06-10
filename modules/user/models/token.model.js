@@ -10,10 +10,10 @@ let Token = new Schema({
         ref:'User',
         required: true
     },
-    created:{
+    created_at:{
         type: Date,
         required:true,
-        default: Date.now
+        default: Date.now()
     },
     purpose:{
         type:String,

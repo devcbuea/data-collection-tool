@@ -57,14 +57,15 @@ let User = new Schema({
     type: Schema.Types.ObjectId,
     ref: "MediaSchema"
   },
-  signed_in: {
+  created_at: {
     type: Date,
-    default: Date.now
+    default: Date.now()
   },
   last_seen: {
     type: Date,
-    default: Date.now
-  }
+    default: Date.now()
+  },
+  
 });
 User.pre('save', function (next) {
     var user = this;
