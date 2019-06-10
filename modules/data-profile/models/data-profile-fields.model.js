@@ -1,30 +1,23 @@
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema
-const config = require('../../../core/env/default')
-
-
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 let DataProfile = new Schema({
     user:{
         type: Schema.Types.ObjectId,
-        ref: 'user'
     },
     name:{
         type: String,
         required:true
     },
-    description:{
+    type:{
         type: String,
         required:true
     },
-    category:{
-        type:String,
-        required: false
+    required:{
+        type:Boolean,
+        required: true,
+        default: false
     }, 
     contributors:{
-        type: Array,
-        required: false
-    },
-    fields: {
         type: Array,
         required: false
     },
@@ -33,11 +26,10 @@ let DataProfile = new Schema({
         required: true,
         default: 0
     },
-    created_at:{
+    created: {
         type: Date,
-        required:true,
         default: Date.now()
-    },
+    }
 });
 
-module.exports = mongoose.model('Data-Profile', DataProfile);
+module.exports = mongoose.model('DataProfile', DataProfile);

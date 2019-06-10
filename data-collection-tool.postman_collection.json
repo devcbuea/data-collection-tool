@@ -6,7 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "localhost:3000/signup",
+			"name": "Sign up",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -28,12 +28,13 @@
 					"path": [
 						"signup"
 					]
-				}
+				},
+				"description": "Enpoint registers the user to the platform"
 			},
 			"response": []
 		},
 		{
-			"name": "localhost:3000/login",
+			"name": "Login",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -44,7 +45,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"email\": \"tane@gmail.com\",\n\t\"password\": \"tanerochris\"\n}"
+					"raw": "{\n\t\"email\": \"tan34@gmail.com\",\n\t\"password\": \"tanerochris\"\n}"
 				},
 				"url": {
 					"raw": "localhost:3000/login",
@@ -55,7 +56,84 @@
 					"path": [
 						"login"
 					]
-				}
+				},
+				"description": "Authenticate the user to the platform"
+			},
+			"response": []
+		},
+		{
+			"name": "Get data profile collection",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Data profile title \",\n\t\"description\": \"This is a sample description of the data profile\",\n\t\"category\": \"Education\",\n\t\"constributors\": null,\n\t\"fields\": [\n\t\t{\n\t\t\t\"name\": \"Age\",\n\t\t\t\"type\": \"number\",\n\t\t\t\"required\": false\n\t\t},\n\t\t\t{\n\t\t\t\"name\": \"Country\",\n\t\t\t\"type\": \"string\",\n\t\t\t\"required\": false\n\t\t}\n\t]\n}"
+				},
+				"url": {
+					"raw": "localhost:3000/data-profile/?search=category,education&limit=3&page=2&own=false",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"data-profile",
+						""
+					],
+					"query": [
+						{
+							"key": "search",
+							"value": "category,education"
+						},
+						{
+							"key": "limit",
+							"value": "3"
+						},
+						{
+							"key": "page",
+							"value": "2"
+						},
+						{
+							"key": "own",
+							"value": "false"
+						}
+					]
+				},
+				"description": "Returns a collection of data profiles. Also enpoint is used for searching collections by passing a search query paramater with the format\n?search=key1,val1;key2,val2;\n\nThe number of collections returned using the query key limit and equally pagination, eg <url>/?limit=100&page=2\n\nBy adding an own=true query parameter ,api returns collections which were created by the authenticated user."
+			},
+			"response": []
+		},
+		{
+			"name": "Create data-profile",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Data profile title \",\n\t\"description\": \"This is a sample description of the data profile\",\n\t\"category\": \"Education\",\n\t\"constributors\": null,\n\t\"fields\": [\n\t\t{\n\t\t\t\"name\": \"Age\",\n\t\t\t\"type\": \"number\",\n\t\t\t\"required\": false\n\t\t},\n\t\t\t{\n\t\t\t\"name\": \"Country\",\n\t\t\t\"type\": \"string\",\n\t\t\t\"required\": false\n\t\t}\n\t]\n}"
+				},
+				"url": {
+					"raw": "localhost:3000/data-profile/",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"data-profile",
+						""
+					]
+				},
+				"description": "Create a data profile"
 			},
 			"response": []
 		}
