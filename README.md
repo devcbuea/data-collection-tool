@@ -66,6 +66,6 @@ Follow the instructions to install node for your specific Os [here](https://yarn
  If you have questions, you can post them in the [Developer Circle Buea Group](https://www.facebook.com/groups/DevCBuea/)
  or create an issue with label Question on the repo
  ## API Documentation
-https://documenter.getpostman.com/view/1600296/S1TZybJH  
+ [API Documentatiob](https://documenter.getpostman.com/view/1600296/S1TZybJH)  
   
   
